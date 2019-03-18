@@ -53,15 +53,8 @@ void mem_copy(void *dest, const void *src, int n)
 */
 void *resize_memory(void *ptr, int old_size, int new_size)
 {
-  printf("ptr %c, old_size %d, new_size %d\n", *(char *)ptr, old_size, new_size);
   char *char_ptr = (char *)ptr;
-  if (old_size > new_size)
-  {
-    // printf("bad pointer: %c at %p\n", *(char_ptr + new_size), (char_ptr + new_size));
-    free((void *)(char_ptr + new_size));
-    return ptr;
-  }
-  else if (old_size < new_size)
+  if (old_size != new_size)
   {
     char *new_ptr = malloc(new_size);
     for (int i = 0; i < new_size; i++)
