@@ -74,7 +74,7 @@ void enqueue(Queue *q, int item)
   if (sizeof(item) * new_length > q->capacity)
   {
     unsigned int new_capacity = q->capacity * 2;
-    int *new_memory = (int *)resize_memory(q->storage, q->capacity, new_capacity);
+    int *new_memory = resize_memory(q->storage, q->capacity, new_capacity);
     q->storage = new_memory;
     q->capacity = new_capacity;
   }
@@ -87,17 +87,25 @@ void enqueue(Queue *q, int item)
     Removes the item at the front of the queue and returns it. 
     If the queue is empty, this function should return -1.
 */
-// int dequeue(Queue *q)
-// {
-// }
+int dequeue(Queue *q)
+{
+  if (q->length == 0)
+  {
+    return -1;
+  }
+  q->length--;
+  return q->storage[q->length];
+}
 
 /*
     Frees the memory used to hold the queue instance and its
     associated storage. 
 */
-// void destroyQueue(Queue *q)
-// {
-// }
+void destroyQueue(Queue *q)
+{
+  free(q->storage);
+  free(q);
+}
 
 #ifndef TESTING
 int main(void)
@@ -111,14 +119,16 @@ int main(void)
   enqueue(q, 5);
   enqueue(q, 6);
 
-  // printf("%d\n", dequeue(q));
-  // printf("%d\n", dequeue(q));
-  // printf("%d\n", dequeue(q));
-  // printf("%d\n", dequeue(q));
-  // printf("%d\n", dequeue(q));
-  // printf("%d\n", dequeue(q));
+  printf("length: %d\n", q->length);
+  printf("%d\n", dequeue(q));
+  printf("%d\n", dequeue(q));
+  printf("%d\n", dequeue(q));
+  printf("%d\n", dequeue(q));
+  printf("%d\n", dequeue(q));
+  printf("%d\n", dequeue(q));
+  printf("length: %d\n", q->length);
 
-  // destroyQueue(q);
+  destroyQueue(q);
 
   return 0;
 }
