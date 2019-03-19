@@ -57,7 +57,7 @@ void *resize_memory(void *ptr, int old_size, int new_size)
   if (old_size != new_size)
   {
     char *new_ptr = malloc(new_size);
-    for (int i = 0; i < new_size; i++)
+    for (int i = 0; i < old_size; i++)
     {
       new_ptr[i] = char_ptr[i];
     }
