@@ -17,6 +17,11 @@
 */
 int partition(int *arr, int low, int high)
 {
+  int pivot_index = (int)((low + high) / 2);
+  if (pivot_index > low)
+  {
+    swap(arr + low, arr + pivot_index);
+  }
   int pivot = arr[low];
   int pivot_target = high;
   int right_pointer = high;
